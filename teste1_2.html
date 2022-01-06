@@ -1,0 +1,146 @@
+<html>
+    <head>
+        <title>Bem Calçado</title>
+        <meta charset="utf-8"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Butcherman&family=Cormorant+SC:wght@300&family=Creepster&family=Diplomata+SC&family=Eater&family=Frijole&family=Germania+One&family=Hanalei+Fill&family=IM+Fell+DW+Pica+SC&family=IM+Fell+Double+Pica+SC&family=IM+Fell+Great+Primer+SC&family=Inknut+Antiqua:wght@300&family=Jomolhari&family=Julius+Sans+One&family=Lacquer&family=Metal+Mania&family=Monofett&family=Nosifer&family=Pinyon+Script&family=Quintessential&family=Syncopate&family=Trade+Winds&family=UnifrakturCook:wght@700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+        <style>
+            #produtos{
+                max-width:900px;
+                margin:0 auto;
+                padding:0 2%;
+                display: flex;
+                flex-wrap: wrap;
+
+            }
+
+            #carrinho{
+                max-width:900px;
+                margin:0 auto;
+                padding: 0 2%;
+                display:block;
+
+            }
+
+            .produto-single{
+                width:32%;
+                margin-right: 1%;
+                border:1px solid #ccc;
+                margin-top:20px;
+                margin-bottom:20px;
+            }
+
+            .produto-single img{
+                max-width:100%;
+            }
+
+            .produto-single p{
+                text-align:center;
+                font-size:16px;
+                padding:10px;
+            }
+
+            .produto-single a{
+                text-decoration: none;
+                color:white;
+                background-color:#5fb382;
+                text-align:center;
+                display:block;
+                padding: 4px 0;
+                font-size:18px;
+            }
+
+            h2{
+                background-color: #4c3282;
+                padding: 10px 0;
+                text-align:center;
+                color:white;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <h2>Vitrine</h2>
+
+        <div id="produtos">
+
+        </div><!--prdutos--> 
+
+        <h2>Carrinho</h2>
+
+        <div id="carrinho">
+
+        </div><!--carrinho-->
+
+        <script>
+            const items = [
+                {
+                    id:0,
+                    nome: 'adidas Coreracer - Preto',
+                    img: 'https://resize.sprintercdn.com/f/550x550/products/0315153/adidas-coreracer_0315153_00_4_2655498786.jpg',
+                    quantidade:0,
+                },
+                {
+                    id:1,
+                    nome:'adidas Coreracer - Preto/Preto',
+                    img: 'https://resize.sprintercdn.com/f/550x550/products/0315154/adidas-coreracer_0315154_00_4_2415624600.jpg',
+                    quantidade:0,
+                },
+                {
+                    id:2,
+                    nome:'adidas Coreracer - Azul',
+                    img:'https://resize.sprintercdn.com/f/550x550/products/0315156/adidas-coreracer_0315156_00_4_525862602.jpg',
+                    quantidade:0,
+
+                
+                },
+            ]
+
+            inicializarLoja = () => {
+                var containerProdutos = document.getElementById('produtos');
+                items.map((val)=>{
+                    containerProdutos.innerHTML+= `
+                    
+                    <div class="produto-single">
+                        <img src="`+val.img+`"/>
+                        <p> `+val.nome+`</p>
+                        <a key="`+val.id+`" href="#">Adicionar ao carrinho!</a>
+                     </div>
+                    `;
+                })
+            }
+
+            inicializarLoja();
+
+            atualizarCarrinho = () => {
+                var containerCarrinho = document.getElementById('carrinho');
+                items.map((val)=>{
+                    if(val.quantidade >0){
+                    containerCarrinho.innerHTML+= `
+                    
+                    <p>`+val.nome+` | quantidade: `+val.quantidade+`</p>
+                    <br>
+
+
+                    `;
+                    }
+                })
+            }
+
+            
+            var links = document.getElementsByTagName('a');
+
+            for (var i = 0; i < links.lenght; i++){
+                links[i].addEventListener('click', function(){
+                    let key = this.getAttribute('key');
+                    items[key].quantidade++;
+                    atualizarCarrinho();
+                    return false
+                })
+            }
+        </script>
+    </body>
+   
+</html>
